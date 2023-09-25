@@ -11,47 +11,53 @@ class TestAddGroup(unittest.TestCase):
     def setUp(self):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
-
     
     def test_add_group(self):
         wd = self.wd
         self.open_home_page(wd)
-        self.login(wd)
+        self.login(wd, "admin", "secret")
         self.open_groups(wd)
-        self.create_group(wd)
+        self.create_group(wd, "456", "789", "123")
         self.return_to_groups(wd)
         self.logout(wd)
-
+    def test_add_empty_group(self):
+        wd = self.wd
+        self.open_home_page(wd)
+        self.login(wd, "admin", "secret")
+        self.open_groups(wd)
+        self.create_group(wd, "", "", "")
+        self.return_to_groups(wd)
+        self.logout(wd)
     def logout(self, wd):
         wd.find_element(By.LINK_TEXT, "Logout").click()
 
     def return_to_groups(self, wd):
         wd.find_element(By.LINK_TEXT, "group page").click()
 
-    def create_group(self, wd):
+    def create_group(self, wd, name, header, footer):
         # create new group
         wd.find_element(By.NAME, "new").click()
         # fill form
         wd.find_element(By.NAME, "group_name").click()
         wd.find_element(By.NAME, "group_name").clear()
-        wd.find_element(By.NAME, "group_name").send_keys("456")
+        wd.find_element(By.NAME, "group_name").send_keys(name)
         wd.find_element(By.NAME, "group_header").click()
         wd.find_element(By.NAME, "group_header").clear()
-        wd.find_element(By.NAME, "group_header").send_keys("789")
+        wd.find_element(By.NAME, "group_header").send_keys(header)
         wd.find_element(By.NAME, "group_footer").click()
         wd.find_element(By.NAME, "group_footer").clear()
-        wd.find_element(By.NAME, "group_footer").send_keys("123")
+        wd.find_element(By.NAME, "group_footer").send_keys(footer)
         # submit group
         wd.find_element(By.NAME, "submit").click()
 
     def open_groups(self, wd):
         wd.find_element(By.LINK_TEXT, "groups").click()
 
-    def login(self, wd):
+    def login(self, wd, username, password):
         wd.find_element(By.NAME, "user").clear()
-        wd.find_element(By.NAME, "user").send_keys("admin")
+        wd.find_element(By.NAME, "user").send_keys(username)
         wd.find_element(By.NAME, "pass").clear()
-        wd.find_element(By.NAME, "pass").send_keys("secret")
+        wd.find_element(By.NAME, "pass").send_keys(password)
         wd.find_element(By.XPATH, "//input[@value='Login']").click()
 
     def open_home_page(self, wd):
