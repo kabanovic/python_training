@@ -15,27 +15,42 @@ class TestAddContact(unittest.TestCase):
     
     def test_add_contact(self):
         wd = self.wd
-        wd.get("http://localhost/addressbook/index.php")
-        wd.find_element(By.NAME, "user").clear()
-        wd.find_element(By.NAME, "user").send_keys("admin")
-        wd.find_element(By.NAME, "pass").clear()
-        wd.find_element(By.NAME, "pass").send_keys("secret")
-        wd.find_element(By.ID, "LoginForm").submit()
+        self.home_page(wd)
+        self.login(wd, "admin", "secret")
+        self.add_contact(wd, "Name1", "Middle1", "Surname1", "89991234567")
+        self.return_home_page(wd)
+        self.logout(wd)
+
+    def logout(self, wd):
+        wd.find_element(By.LINK_TEXT, "Logout").click()
+
+    def return_home_page(self, wd):
+        wd.find_element(By.LINK_TEXT, "home page").click()
+
+    def add_contact(self, wd, firstname, middlename, lastname, telephone):
         wd.find_element(By.LINK_TEXT, "add new").click()
         wd.find_element(By.NAME, "firstname").click()
         wd.find_element(By.NAME, "firstname").clear()
-        wd.find_element(By.NAME, "firstname").send_keys("Name1")
+        wd.find_element(By.NAME, "firstname").send_keys(firstname)
         wd.find_element(By.NAME, "middlename").clear()
-        wd.find_element(By.NAME, "middlename").send_keys("Middle1")
+        wd.find_element(By.NAME, "middlename").send_keys(middlename)
         wd.find_element(By.NAME, "lastname").clear()
-        wd.find_element(By.NAME, "lastname").send_keys("Surname1")
+        wd.find_element(By.NAME, "lastname").send_keys(lastname)
         wd.find_element(By.NAME, "mobile").click()
         wd.find_element(By.NAME, "mobile").clear()
-        wd.find_element(By.NAME,"mobile").send_keys("89991234567")
+        wd.find_element(By.NAME, "mobile").send_keys(telephone)
         wd.find_element(By.XPATH, "//div[@id='content']/form/input[21]").click()
-        wd.find_element(By.LINK_TEXT, "home page").click()
-        wd.find_element(By.LINK_TEXT, "Logout").click()
-    
+
+    def login(self, wd, username, password):
+        wd.find_element(By.NAME, "user").clear()
+        wd.find_element(By.NAME, "user").send_keys(username)
+        wd.find_element(By.NAME, "pass").clear()
+        wd.find_element(By.NAME, "pass").send_keys(password)
+        wd.find_element(By.ID, "LoginForm").submit()
+
+    def home_page(self, wd):
+        wd.get("http://localhost/addressbook/index.php")
+
     def is_element_present(self, how, what):
         try: self.wd.find_element(by=how, value=what)
         except NoSuchElementException as e: return False
