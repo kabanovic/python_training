@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
-import time
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 class Session:
 
@@ -19,4 +19,9 @@ class Session:
     def logout(self):
         wd = self.app.wd
         wd.find_element(By.LINK_TEXT, "Logout").click()
-        time.sleep(2)
+        try:
+            element = WebDriverWait(wd, 2).until(
+                EC.presence_of_element_located((By.NAME, "user"))
+            )
+        except:
+            print("!!!")
