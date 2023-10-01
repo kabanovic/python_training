@@ -60,3 +60,15 @@ class GroupHelper:
         wd = self.app.wd
         wd.find_element(By.LINK_TEXT, "groups").click()
 
+    def edit_name_group(self, name):
+        wd = self.app.wd
+        self.open_groups()
+        # choose group
+        wd.find_element(By.NAME, "selected[]").click()
+        wd.find_element(By.NAME, "edit").click()
+        # fill form
+        wd.find_element(By.NAME, "group_name").click()
+        wd.find_element(By.NAME, "group_name").clear()
+        wd.find_element(By.NAME, "group_name").send_keys(name)
+        wd.find_element(By.NAME, "update").click()
+        self.return_to_groups()
