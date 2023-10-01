@@ -11,10 +11,10 @@ def app(request):
 
 def test_add_group(app):
     app.session.login("admin", "secret")
-    app.create_group(Group("456", "789", "123"))
+    app.group.create(Group("456", "789", "123"))
     app.session.logout()
 def test_add_empty_group(app):
     app.session.login("admin", "secret")
-    app.create_group(Group("", "", ""))
+    app.group.create(Group("", "", ""))
     app.session.logout()
 
