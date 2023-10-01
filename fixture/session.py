@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 import time
+from selenium.webdriver.support import expected_conditions as EC
+
 class Session:
 
     def __init__(self, app):
