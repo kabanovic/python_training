@@ -11,6 +11,6 @@ def appl(request):
 
 def test_add_contact(appl):
     appl.sess.login("admin", "secret")
-    appl.contact.add(Contact("Name2", "Middle2", "Surname2", "89991234567"))
+    appl.contact.add(Contact("Name3", "Middle3", "Surname3", "89991234567"))
     appl.sess.logout()
 

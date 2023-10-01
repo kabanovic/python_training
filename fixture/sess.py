@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+import time
 
 class Sess:
 
@@ -17,3 +18,4 @@ class Sess:
     def logout(self):
         wd = self.appl.wd
         wd.find_element(By.LINK_TEXT, "Logout").click()
+        time.sleep(2)
