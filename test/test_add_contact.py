@@ -10,7 +10,7 @@ def appl(request):
     return fixture
 
 def test_add_contact(appl):
-    appl.login("admin", "secret")
-    appl.add_contact(Contact("Name2", "Middle2", "Surname2", "89991234567"))
-    appl.logout()
+    appl.sess.login("admin", "secret")
+    appl.contact.add(Contact("Name2", "Middle2", "Surname2", "89991234567"))
+    appl.sess.logout()
 
