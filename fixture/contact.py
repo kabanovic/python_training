@@ -26,8 +26,3 @@ class ContactHelper:
         self.return_home_page()
 
 
-    def delete_first_cont(self):
-        wd = self.app.wd
-        wd.find_element(By.NAME, "selected[]").click()
-        wd.find_element(By.XPATH, "//input[@value='Delete']").click()
-        wd.switch_to.alert.accept()
