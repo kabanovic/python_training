@@ -2,15 +2,15 @@ from selenium.webdriver.common.by import By
 
 class ContactHelper:
 
-    def __init__(self, appl):
-        self.appl = appl
+    def __init__(self, app):
+        self.app = app
 
     def return_home_page(self):
-        wd = self.appl.wd
+        wd = self.app.wd
         wd.find_element(By.LINK_TEXT, "home page").click()
 
     def add(self, contact):
-        wd = self.appl.wd
+        wd = self.app.wd
         wd.find_element(By.LINK_TEXT, "add new").click()
         wd.find_element(By.NAME, "firstname").click()
         wd.find_element(By.NAME, "firstname").clear()
