@@ -8,16 +8,16 @@ from selenium.common.exceptions import NoAlertPresentException
 import unittest
 import pytest
 from contact import Contact
-from fixt import Applicat
+from application import Application
 
 @pytest.fixture
-def appl(request):
-    fixture = Applicat()
-    request.addfinalizer(fixture.destr)
+def app(request):
+    fixture = Application()
+    request.addfinalizer(fixture.destroy)
     return fixture
 
-def test_add_contact(appl):
-    appl.login("admin", "secret")
-    appl.add_contact(Contact("Name2", "Middle2", "Surname2", "89991234567"))
-    appl.logout()
+def test_add_contact(app):
+    app.login("admin", "secret")
+    app.add_contact(Contact("Name2", "Middle2", "Surname2", "89991234567"))
+    app.logout()
 
