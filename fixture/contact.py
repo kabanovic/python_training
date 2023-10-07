@@ -5,6 +5,8 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
+
+
     def return_home_page(self):
         wd = self.app.wd
         wd.find_element(By.LINK_TEXT, "home page").click()
@@ -19,6 +21,7 @@ class ContactHelper:
 
     def delete_first_cont(self):
         wd = self.app.wd
+        wd.get("http://localhost/addressbook/index.php")
         wd.find_element(By.NAME, "selected[]").click()
         wd.find_element(By.XPATH, "//input[@value='Delete']").click()
         wd.switch_to.alert.accept()
@@ -26,6 +29,7 @@ class ContactHelper:
 
     def edit_first_cont(self, contact):
         wd = self.app.wd
+        wd.get("http://localhost/addressbook/index.php")
         wd.find_element(By.XPATH, "//img[@alt='Edit']").click()
         self.contact(contact)
         wd.find_element(By.NAME, "update").click()
