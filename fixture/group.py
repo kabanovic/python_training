@@ -57,12 +57,15 @@ class GroupHelper:
         wd.find_element(By.NAME, "delete").click()
         self.return_to_groups()
 
+
     def open_groups(self):
         wd = self.app.wd
+        if wd.current_url.endswith("/group.php") and len(wd.find_elements(By.NAME, "new")) > 0:
+            return
         wd.find_element(By.LINK_TEXT, "groups").click()
 
 
-    def count(self):
+    def count_group(self):
         wd = self.app.wd
         self.open_groups()
         return len(wd.find_elements(By.NAME, "selected[]"))

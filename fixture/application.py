@@ -21,6 +21,8 @@ class Application:
             return False
     def open_home_page(self):
         wd = self.wd
+        if wd.current_url.endswith("/index.php"):
+            return
         wd.get("http://localhost/addressbook/index.php")
 
     def destroy(self):

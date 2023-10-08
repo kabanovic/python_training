@@ -19,12 +19,7 @@ class Session:
     def logout(self):
         wd = self.app.wd
         wd.find_element(By.LINK_TEXT, "Logout").click()
-        try:
-            element = WebDriverWait(wd, 2).until(
-                EC.presence_of_element_located((By.NAME, "user"))
-            )
-        except:
-            print("!!!")
+
 
 
     def ensure_logout(self):

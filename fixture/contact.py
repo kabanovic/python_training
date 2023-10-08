@@ -1,10 +1,10 @@
 from selenium.webdriver.common.by import By
 
+
 class ContactHelper:
 
     def __init__(self, app):
         self.app = app
-
 
 
     def return_home_page(self):
@@ -26,6 +26,8 @@ class ContactHelper:
         wd.find_element(By.NAME, "selected[]").click()
         wd.find_element(By.XPATH, "//input[@value='Delete']").click()
         wd.switch_to.alert.accept()
+
+
 
 
     def edit_first_cont(self, contact):
