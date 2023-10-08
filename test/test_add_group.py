@@ -6,7 +6,6 @@ def test_add_group(app):
     app.group.create(Group("456", "789", "123"))
 
 
-
 def test_add_empty_group(app):
     app.group.create(Group("", "", ""))
 
