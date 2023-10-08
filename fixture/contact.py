@@ -48,3 +48,8 @@ class ContactHelper:
         wd.find_element(By.NAME, "mobile").click()
         wd.find_element(By.NAME, "mobile").clear()
         wd.find_element(By.NAME, "mobile").send_keys(contact.telephone)
+
+    def count_cont(self):
+        wd = self.app.wd
+        self.app.open_home_page()
+        return len(wd.find_elements(By.NAME, "selected[]"))
