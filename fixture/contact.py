@@ -6,7 +6,6 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
-
     def return_home_page(self):
         wd = self.app.wd
         wd.find_element(By.LINK_TEXT, "home page").click()
@@ -19,16 +18,12 @@ class ContactHelper:
         wd.find_element(By.XPATH, "//div[@id='content']/form/input[21]").click()
         self.return_home_page()
 
-
     def delete_first_cont(self):
         wd = self.app.wd
         self.app.open_home_page()
         wd.find_element(By.NAME, "selected[]").click()
         wd.find_element(By.XPATH, "//input[@value='Delete']").click()
         wd.switch_to.alert.accept()
-
-
-
 
     def edit_first_cont(self, contact):
         wd = self.app.wd
@@ -54,4 +49,4 @@ class ContactHelper:
     def count_cont(self):
         wd = self.app.wd
         self.app.open_home_page()
-        return len(wd.find_elements(By.NAME, "selected[]"))
+        return len(wd.find_elements(By.XPATH, "//img[@alt='Edit']"))

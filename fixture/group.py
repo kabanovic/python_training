@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-
+from model.group import Group
 class GroupHelper:
 
     def __init__(self, app):
@@ -25,7 +25,6 @@ class GroupHelper:
         self.change_field("group_name", group.name)
         self.change_field("group_header", group.header)
         self.change_field("group_footer", group.footer)
-
 
     def change_field(self, field_name, text):
         wd = self.app.wd
@@ -57,15 +56,23 @@ class GroupHelper:
         wd.find_element(By.NAME, "delete").click()
         self.return_to_groups()
 
-
     def open_groups(self):
         wd = self.app.wd
         if wd.current_url.endswith("/group.php") and len(wd.find_elements(By.NAME, "new")) > 0:
             return
         wd.find_element(By.LINK_TEXT, "groups").click()
 
-
     def count_group(self):
         wd = self.app.wd
         self.open_groups()
         return len(wd.find_elements(By.NAME, "selected[]"))
+
+    def get_group_list(self):
+        wd = self.app.wd
+        self.open_groups()
+        groups = []
+        for element in wd.find_elements(By.CSS_SELECTOR, "span.group"):
+            text = element.text
+            id = element.find_element(By.NAME, "selected[]").get_attribute("value")
+            groups.append(Group(name=text, id=id))
+        return groups
