@@ -21,17 +21,23 @@ class ContactHelper:
         self.cont_cache = None
 
     def delete_first_cont(self):
+        self.delete_some_cont(0)
+
+    def delete_some_cont(self, index):
         wd = self.app.wd
         self.app.open_home_page()
-        wd.find_element(By.NAME, "selected[]").click()
+        wd.find_elements(By.NAME, "selected[]")[index].click()
         wd.find_element(By.XPATH, "//input[@value='Delete']").click()
         wd.switch_to.alert.accept()
         self.cont_cache = None
 
     def edit_first_cont(self, contact):
+        self.edit_some_cont(0)
+
+    def edit_some_cont(self, index, contact):
         wd = self.app.wd
         self.app.open_home_page()
-        wd.find_element(By.XPATH, "//img[@alt='Edit']").click()
+        wd.find_elements(By.XPATH, "//img[@alt='Edit']")[index].click()
         self.fill_contact_form(contact)
         wd.find_element(By.NAME, "update").click()
         self.return_home_page()
