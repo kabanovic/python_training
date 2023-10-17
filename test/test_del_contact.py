@@ -16,7 +16,7 @@ def test_del_contact(app):
         element.click()
     except:
         print("!!!")
+    assert len(old_contacts) - 1 == app.contact.count_cont()
     new_contacts = app.contact.get_contact_list()
-    assert len(old_contacts) - 1 == len(new_contacts)
     old_contacts[0:1] = []
     assert old_contacts == new_contacts
