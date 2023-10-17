@@ -35,10 +35,13 @@ class GroupHelper:
             wd.find_element(By.NAME, field_name).send_keys(text)
 
     def edit_first_group(self, new_group_data):
+        self.edit_some_group(0)
+
+    def edit_some_group(self, index, new_group_data):
         wd = self.app.wd
         self.open_groups()
         # choose group
-        self.select_first_group()
+        self.select_some_group(index)
         wd.find_element(By.NAME, "edit").click()
         # fill form
         self.fill_group_form(new_group_data)
@@ -49,12 +52,19 @@ class GroupHelper:
 
     def select_first_group(self):
         wd = self.app.wd
-        wd.find_element(By.NAME, "selected[]").click()
+        wd.find_elements(By.NAME, "selected[]").click()
+
+    def select_some_group(self, index):
+        wd = self.app.wd
+        wd.find_elements(By.NAME, "selected[]")[index].click()
 
     def delete_first_group(self):
+        self.delete_some_group(0)
+
+    def delete_some_group(self, index):
         wd = self.app.wd
         self.open_groups()
-        self.select_first_group()
+        self.select_some_group(index)
         wd.find_element(By.NAME, "delete").click()
         self.return_to_groups()
         self.group_cache = None
