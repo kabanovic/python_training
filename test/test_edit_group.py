@@ -7,7 +7,7 @@ def test_edit_some_group(app):
         app.group.create(Group("rty", "fgh", "vbn"))
     old_groups = app.group.get_group_list()
     index = randrange(len(old_groups))
-    group = Group("999", "888", "777")
+    group = Group("545", "888", "777")
     group.id = old_groups[index].id
     app.group.edit_some_group(index, group)
     assert len(old_groups) == app.group.count_group()
