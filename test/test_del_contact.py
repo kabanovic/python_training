@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from random import randrange
 
+
 def test_del_some_contact(app):
     if app.contact.count_cont() == 0:
         app.contact.add(Contact("Vasya", "Vas", "Vasilev"))

@@ -1,6 +1,7 @@
 from model.contact import Contact
 from random import randrange
 
+
 def test_edit_some_cont(app):
     if app.contact.count_cont() == 0:
         app.contact.add(Contact("Vasya", "Vas", "Vasilev"))

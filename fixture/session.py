@@ -1,7 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-
 class Session:
 
     def __init__(self, app):
@@ -20,8 +19,6 @@ class Session:
         wd = self.app.wd
         wd.find_element(By.LINK_TEXT, "Logout").click()
 
-
-
     def ensure_logout(self):
         wd = self.app.wd
         if self.is_logged_in():
@@ -31,10 +28,13 @@ class Session:
         wd = self.app.wd
         return len(wd.find_elements(By.LINK_TEXT, "Logout")) > 0
 
-
     def is_logged_in_as(self, username):
         wd = self.app.wd
-        return wd.find_element(By.XPATH, "//div/div[1]/form/b").text == "("+username+")"
+        return self.get_logged_user() == username
+
+    def get_logged_user(self):
+        wd = self.app.wd
+        return wd.find_element(By.XPATH, "//div/div[1]/form/b").text[1:-1]
 
     def ensure_login(self, username, password):
         wd = self.app.wd
