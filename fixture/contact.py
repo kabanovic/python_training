@@ -62,6 +62,7 @@ class ContactHelper:
         self.change_contact_field("firstname", contact.firstname)
         self.change_contact_field("middlename", contact.middlename)
         self.change_contact_field("lastname", contact.lastname)
+        #self.change_contact_field("home", contact.homephone)
         #self.change_contact_field("mobile", contact.telephone)
 
     def change_contact_field(self, field_name, text):
@@ -91,7 +92,7 @@ class ContactHelper:
                 all_phones = cells[5].text
                 adress = cells[3].text
                 all_mails = cells[4].text
-                self.cont_cache.append(Contact(firsname=firstname, lastname=lastname, id=id, adress=adress,
+                self.cont_cache.append(Contact(firstname=firstname, lastname=lastname, id=id, adress=adress,
                                                all_phones_from_home_page=all_phones, all_mails=all_mails))
         return list(self.cont_cache)
 
@@ -123,7 +124,7 @@ class ContactHelper:
         workphone = wd.find_element(By.NAME, "work").get_attribute("value")
         mobilephone = wd.find_element(By.NAME, "mobile").get_attribute("value")
         secondaryphone = wd.find_element(By.NAME, "phone2").get_attribute("value")
-        return Contact(firsname=firstname, lastname=lastname, id=id, adress=adress, homephone=homephone,
+        return Contact(firstname=firstname, lastname=lastname, id=id, adress=adress, homephone=homephone,
                        workphone=workphone, mobilephone=mobilephone, secondaryphone=secondaryphone,
                        email=email, email2=email2, email3=email3)
 
