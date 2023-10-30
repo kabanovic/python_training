@@ -11,7 +11,7 @@ def test_contact_on_home_page(app):
     assert contact_from_home_page.lastname == contact_from_edit_page.lastname
     assert contact_from_home_page.firstname == contact_from_edit_page.firstname
     assert contact_from_home_page.adress == contact_from_edit_page.adress
-    assert contact_from_home_page.all_mails == merge_mails(contact_from_edit_page)
+    assert clear(contact_from_home_page.all_mails) == merge_mails(contact_from_edit_page)
 
 #def test_phones_on_contact_view_page(app):
  #    contact_from_view_page = app.contact.get_contact_from_view_page(0)
