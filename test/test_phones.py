@@ -11,7 +11,7 @@ def test_contact_on_home_page(app):
     assert contact_from_home_page.lastname == contact_from_edit_page.lastname
     assert contact_from_home_page.firstname == contact_from_edit_page.firstname
     assert contact_from_home_page.adress == contact_from_edit_page.adress
-    assert clear(contact_from_home_page.all_mails) == merge_mails(contact_from_edit_page)
+    assert contact_from_home_page.all_mails == merge_mails(contact_from_edit_page)
 
 #def test_phones_on_contact_view_page(app):
  #    contact_from_view_page = app.contact.get_contact_from_view_page(0)
@@ -33,8 +33,6 @@ def merge_phones_like_on_home_page(contact):
 
 
 def merge_mails(contact):
-     return "\n".join(filter(lambda x: x != "",
-                             map(lambda x: clear(x), filter(lambda x: x is not None,
-                                 [contact.email, contact.email2, contact.email3]))))
+     return "\n".join(filter(lambda x: x != "", filter(lambda x: x is not None, [contact.email, contact.email2, contact.email3])))
 
 
