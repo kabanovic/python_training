@@ -32,6 +32,14 @@ class ContactHelper:
         wd.switch_to.alert.accept()
         self.cont_cache = None
 
+    def delete_some_cont_by_id(self, id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element(By.CSS_SELECTOR, "input[value='%s']" % id).click()
+        wd.find_element(By.XPATH, "//input[@value='Delete']").click()
+        wd.switch_to.alert.accept()
+        self.cont_cache = None
+
     def edit_first_cont(self, contact):
         self.edit_some_cont(0)
 
@@ -39,6 +47,16 @@ class ContactHelper:
         wd = self.app.wd
         self.app.open_home_page()
         wd.find_elements(By.XPATH, "//img[@alt='Edit']")[index].click()
+        self.fill_contact_form(contact)
+        wd.find_element(By.NAME, "update").click()
+        self.return_home_page()
+        self.cont_cache = None
+
+    def edit_some_cont_by_id(self, id, contact):
+        wd = self.app.wd
+        self.app.open_home_page()
+        #wd.find_element(By.CSS_SELECTOR, f"a[href='edit.php?id={id}']").click()
+        wd.find_element(By.CSS_SELECTOR, "a[href='edit.php?id=%s']" % id).click()
         self.fill_contact_form(contact)
         wd.find_element(By.NAME, "update").click()
         self.return_home_page()
