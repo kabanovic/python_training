@@ -40,6 +40,13 @@ class ContactHelper:
         wd.switch_to.alert.accept()
         self.cont_cache = None
 
+    def add_some_cont_to_group(self, id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element(By.CSS_SELECTOR, "input[value='%s']" % id).click()
+        wd.find_element(By.XPATH, "//input[@value='Add to']").click()
+        self.cont_cache = None
+
     def edit_first_cont(self, contact):
         self.edit_some_cont(0)
 
