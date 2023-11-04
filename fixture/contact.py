@@ -47,6 +47,20 @@ class ContactHelper:
         wd.find_element(By.XPATH, "//input[@value='Add to']").click()
         self.cont_cache = None
 
+    def select_group_for_del_cont(self, index):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element(By.NAME, "group").click()
+        wd.find_element(By.XPATH, f"//option[@value={index}]").click()
+
+    def del_some_cont_from_group(self, id):
+        wd = self.app.wd
+        wd.find_element(By.CSS_SELECTOR, "input[value='%s']" % id).click()
+        wd.find_element(By.NAME, "remove").click()
+        wd.find_element(By.XPATH, "//i/a").click()
+        #wd.find_element(By.LINK_TEXT, f'a[href="/?group={id}"]').click()
+        self.cont_cache = None
+
     def edit_first_cont(self, contact):
         self.edit_some_cont(0)
 
