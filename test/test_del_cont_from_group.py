@@ -5,6 +5,8 @@ import random
 
 def test_del_contact_from_group(app, db):
     db = ORMFixture(host="127.0.0.1", name="addressbook", user="root", password="")
+    if len(app.group.get_group_list()) == 0:
+        app.group.create(Group("gr2", "hd2", "foo2"))
     group_list = app.group.get_group_list()
     id = group_list[0].id
     contacts_in_gr = db.get_contacts_in_group(Group(id=id))
